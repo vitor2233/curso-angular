@@ -1,1 +1,12 @@
-<p>cursos works!</p>
+<p>Lista de cursos</p>
+
+
+<div class="card" style="width: 18rem;">
+    <ul class="list-group list-group-flush">
+      <li *ngFor="let curso of cursos" class="list-group-item">
+        <a [routerLink]="['/curso', curso.id]">
+            {{ curso.nome }}
+        </a>
+    </li>
+    </ul>
+  </div>
