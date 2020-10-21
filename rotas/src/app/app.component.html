@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand-md navbar-light bg-light">
   <a routerLink="" class="navbar-brand">Rotas</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
     aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -12,9 +12,14 @@
       <li class="nav-item" routerLinkActive="active">
         <a class="nav-link" routerLink="/cursos">Cursos</a>
       </li>
+      <li class="nav-item" routerLinkActive="active">
+        <a class="nav-link" [routerLink]="['curso', idCurso.value]">Curso com ID</a>
+      </li>
     </ul>
   </div>
 </nav>
 <div class="container">
+  <p>ID do curso</p>
+  <input #idCurso (input)="0">
   <router-outlet></router-outlet>
 </div>
