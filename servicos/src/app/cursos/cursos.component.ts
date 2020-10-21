@@ -13,13 +13,17 @@ export class CursosComponent implements OnInit {
 
   //cursosService: CursosService;
 
-  constructor(private cursosService: CursosService) { 
+  constructor(private cursosService: CursosService) {
     //this.cursosService = new CursosService();
     //this.cursosService = _cursosService;
   }
 
-  ngOnInit(){
+  ngOnInit() {
     this.cursos = this.cursosService.getCursos();
+
+    CursosService.criouNovoCurso.subscribe(
+      curso => this.cursos.push(curso)
+    );
   }
 
 }
