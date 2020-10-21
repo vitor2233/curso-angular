@@ -23,7 +23,19 @@ export class ExemplosPipesComponent implements OnInit {
   addCurso(valor){
     this.livros.push(valor);
     console.log(this.livros);
-    
+  }
+
+  obterCursos() {
+    if(this.livros.length === 0 || this.filtro === undefined || this.filtro.trim() === '') {
+      return this.livros;
+    }
+
+    return this.livros.filter((v) => {
+      if(v.toLocaleLowerCase().includes(this.filtro.toLocaleLowerCase())){
+        return true;
+      }
+      return false;
+    });
   }
 
   constructor() { }
