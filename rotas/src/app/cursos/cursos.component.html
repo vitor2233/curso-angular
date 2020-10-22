@@ -4,7 +4,7 @@
 <div class="card" style="width: 18rem;">
     <ul class="list-group list-group-flush">
         <li *ngFor="let curso of cursos" class="list-group-item">
-            <a [routerLink]="['/curso', curso.id]">
+            <a [routerLink]="['/cursos', curso.id]">
                 {{ curso.nome }}
             </a>
         </li>
