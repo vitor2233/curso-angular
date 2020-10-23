@@ -15,5 +15,5 @@
       <span>Email inválido</span>
     </div>
   </div>
-  <button type="submit" class="btn btn-primary">Submit</button>
+  <button [disabled]="!f.valid" type="submit" class="btn btn-primary">Submit</button>
 </form>
