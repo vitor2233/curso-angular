@@ -13,13 +13,22 @@ export class TemplateFormComponent implements OnInit {
   }
 
   onSubmit(form){
-    console.log(form, this.usuario);
-    
+
   }
 
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  verificaValidTouched(campo){
+    return !campo.valid && campo.touched;
+  }
+
+  aplicaCssErro(campo){
+    return {
+      'is-invalid': this.verificaValidTouched(campo)
+    }
   }
 
 }
