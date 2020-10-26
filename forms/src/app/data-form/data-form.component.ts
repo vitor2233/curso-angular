@@ -12,8 +12,6 @@ export class DataFormComponent implements OnInit {
 
   formulario: FormGroup;
 
-
-
   constructor(private formBuilder: FormBuilder, private http: HttpClient) { }
 
   ngOnInit(): void {
@@ -54,6 +52,53 @@ export class DataFormComponent implements OnInit {
 
   resetar() {
     this.formulario.reset();
+  }
+
+  consultaCEP() {
+
+    let cep = this.formulario.get('endereco.cep').value;
+
+    //Tirar letras
+    cep = cep.replace(/\D/g, '');
+
+    if (cep != "") {
+      //Precisa ter 8 dígitos de 0 a 9
+      const validacep = /^[0-9]{8}$/;
+
+      if (validacep.test(cep)) {
+
+        this.resetaDadosForm();
+
+        this.http.get(`https://viacep.com.br/ws/${cep}/json/`)
+          .subscribe(dados => this.populaDadosForm(dados));
+      }
+    }
+  }
+
+  populaDadosForm(dados) {
+    this.formulario.patchValue({
+      endereco: {
+        complemento: dados.complemento,
+        rua: dados.logradouro,
+        bairro: dados.bairro,
+        cidade: dados.localidade,
+        estado: dados.uf
+      }
+    });
+
+    this.formulario.get('nome').setValue('Vitor');
+  }
+
+  resetaDadosForm() {
+    this.formulario.patchValue({
+      endereco: {
+        complemento: null,
+        rua: null,
+        bairro: null,
+        cidade: null,
+        estado: null
+      }
+    });
   }
 
   verificaValidTouched(campo: string) {
