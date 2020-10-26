@@ -34,6 +34,13 @@ export class DataFormComponent implements OnInit {
         Validators.minLength(3),
         Validators.email
       ]],
+      cep: [null, Validators.required],
+      numero: [null, Validators.required],
+      complemento: [null],
+      rua: [null, Validators.required],
+      bairro: [null, Validators.required],
+      cidade: [null, Validators.required],
+      estado: [null, Validators.required],
     });
   }
 
@@ -52,7 +59,7 @@ export class DataFormComponent implements OnInit {
     this.formulario.reset();
   }
 
-  verificaValidTouched(campo) {
+  verificaValidTouched(campo: string) {
     return !this.formulario.get(campo).valid && this.formulario.get(campo).touched
   }
 
@@ -65,7 +72,7 @@ export class DataFormComponent implements OnInit {
     }
   }
 
-  aplicaCssErro(campo) {
+  aplicaCssErro(campo: string) {
     return {
       'is-invalid': this.verificaValidTouched(campo)
     }
