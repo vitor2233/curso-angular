@@ -26,7 +26,7 @@
       <div class="col-md-3 form-group">
         <label for="cep" class="control-label">CEP</label>
         <input type="text" class="form-control" id="cep" name="cep" [ngClass]="aplicaCssErro(cep)" ngModel required
-          #cep="ngModel">
+          #cep="ngModel" (blur)="consultaCEP(cep.value)">
         <app-campo-control [mostrarErro]="verificaValidTouched(cep)" msgErro="CEP inválido">
         </app-campo-control>
       </div>
