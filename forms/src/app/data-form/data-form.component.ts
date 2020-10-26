@@ -18,11 +18,6 @@ export class DataFormComponent implements OnInit {
 
   ngOnInit(): void {
 
-    /*this.formulario = new FormGroup({
-      nome: new FormControl(null),
-      email: new FormControl(null)
-    });*/
-
     this.formulario = this.formBuilder.group({
       nome: [null, [
         Validators.required,
@@ -34,13 +29,15 @@ export class DataFormComponent implements OnInit {
         Validators.minLength(3),
         Validators.email
       ]],
-      cep: [null, Validators.required],
-      numero: [null, Validators.required],
-      complemento: [null],
-      rua: [null, Validators.required],
-      bairro: [null, Validators.required],
-      cidade: [null, Validators.required],
-      estado: [null, Validators.required],
+      endereco: this.formBuilder.group({
+        cep: [null, Validators.required],
+        numero: [null, Validators.required],
+        complemento: [null],
+        rua: [null, Validators.required],
+        bairro: [null, Validators.required],
+        cidade: [null, Validators.required],
+        estado: [null, Validators.required],
+      })
     });
   }
 
@@ -55,7 +52,7 @@ export class DataFormComponent implements OnInit {
       }, (error: any) => alert('Erro'));
   }
 
-  resetar(){
+  resetar() {
     this.formulario.reset();
   }
 
@@ -63,11 +60,11 @@ export class DataFormComponent implements OnInit {
     return !this.formulario.get(campo).valid && this.formulario.get(campo).touched
   }
 
-  verificaEmailInvalido(){
+  verificaEmailInvalido() {
     let campoEmail = this.formulario.get('email');
 
 
-    if(campoEmail.errors){
+    if (campoEmail.errors) {
       return campoEmail.errors && campoEmail.touched;
     }
   }

@@ -21,20 +21,20 @@
       </div>
     </div>
   </div>
-  <div>
+  <div formGroupName="endereco">
     <div class="form-row container">
       <div class="col-md-3 form-group">
         <label for="cep" class="control-label">CEP</label>
-        <input type="text" class="form-control" id="cep" formControlName="cep" [ngClass]="aplicaCssErro('cep')">
-        <div class="invalid-feedback" *ngIf="verificaValidTouched('cep')">
+        <input type="text" class="form-control" id="cep" formControlName="cep" [ngClass]="aplicaCssErro('endereco.cep')">
+        <div class="invalid-feedback" *ngIf="verificaValidTouched('endereco.cep')">
           <span>CEP é obrigatório</span>
         </div>
       </div>
 
       <div class="col-md-3 form-group">
         <label for="numero" class="control-label">Número</label>
-        <input type="number" class="form-control" id="numero" formControlName="numero" [ngClass]="aplicaCssErro('numero')">
-          <div class="invalid-feedback" *ngIf="verificaValidTouched('numero')">
+        <input type="number" class="form-control" id="numero" formControlName="numero" [ngClass]="aplicaCssErro('endereco.numero')">
+          <div class="invalid-feedback" *ngIf="verificaValidTouched('endereco.numero')">
             <span>Número é obrigatório</span>
           </div>
       </div>
@@ -49,8 +49,8 @@
         <label for="rua">Rua</label>
       </div>
       <div class="col-sm-12">
-        <input type="text" class="form-control" name="rua" formControlName="rua" [ngClass]="aplicaCssErro('rua')" id="rua">
-        <div class="invalid-feedback" *ngIf="verificaValidTouched('numero')">
+        <input type="text" class="form-control" name="rua" formControlName="rua" [ngClass]="aplicaCssErro('endereco.rua')" id="rua">
+        <div class="invalid-feedback" *ngIf="verificaValidTouched('endereco.rua')">
           <span>Rua é obrigatória</span>
         </div>
       </div>
@@ -58,25 +58,25 @@
     <div class="form-row container">
       <div class="col-md-5 form-group">
         <label for="bairro" class="control-label">Bairro</label>
-        <input type="text" class="form-control" id="bairro" formControlName="bairro" [ngClass]="aplicaCssErro('bairro')">
-          <div class="invalid-feedback" *ngIf="verificaValidTouched('bairro')">
+        <input type="text" class="form-control" id="bairro" formControlName="bairro" [ngClass]="aplicaCssErro('endereco.bairro')">
+          <div class="invalid-feedback" *ngIf="verificaValidTouched('endereco.bairro')">
             <span>Bairro é obrigatório</span>
           </div>
       </div>
 
       <div class="col-md-4 form-group">
         <label for="cidade" class="control-label">Cidade</label>
-        <input type="text" class="form-control" id="cidade" formControlName="cidade" [ngClass]="aplicaCssErro('cidade')">
-          <div class="invalid-feedback" *ngIf="verificaValidTouched('cidade')">
+        <input type="text" class="form-control" id="cidade" formControlName="cidade" [ngClass]="aplicaCssErro('endereco.cidade')">
+          <div class="invalid-feedback" *ngIf="verificaValidTouched('endereco.cidade')">
             <span>Cidade é obrigatório</span>
           </div>
       </div>
 
       <div class="col-md-3 form-group">
         <label for="estado" class="control-label">Estado</label>
-        <input type="text" class="form-control" id="estado" formControlName="estado" [ngClass]="aplicaCssErro('estado')">
+        <input type="text" class="form-control" id="estado" formControlName="estado" [ngClass]="aplicaCssErro('endereco.estado')">
         <div>
-          <div class="invalid-feedback" *ngIf="verificaValidTouched('estado')">
+          <div class="invalid-feedback" *ngIf="verificaValidTouched('endereco.estado')">
             <span>Estado é obrigatório</span>
           </div>
         </div>
