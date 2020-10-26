@@ -40,14 +40,30 @@ export class DataFormComponent implements OnInit {
   }
 
   onSubmit() {
-    this.http.post('https://httpbin.org/post',
-      JSON.stringify(this.formulario.value))
-      .pipe(map(dados => dados))
-      .subscribe(dados => {
-        console.log(dados);
-        //Reseta form
-        this.resetar();
-      }, (error: any) => alert('Erro'));
+    if (this.formulario.valid) {
+      this.http.post('https://httpbin.org/post',
+        JSON.stringify(this.formulario.value))
+        .pipe(map(dados => dados))
+        .subscribe(dados => {
+          console.log(dados);
+          //Reseta form
+          this.resetar();
+        }, (error: any) => alert('Erro'));
+    } else {
+      this.verificaValidacoesForm(this.formulario);
+    }
+  }
+
+  verificaValidacoesForm(formGroup: FormGroup) {
+    //Pegar cada item dentro do formulario
+    Object.keys(formGroup.controls).forEach(campo => {
+      const controle = formGroup.get(campo);
+      controle.markAsDirty();
+      //Verificar se é um grupo de dados
+      if (controle instanceof FormGroup) {
+        this.verificaValidacoesForm(controle)
+      }
+    });
   }
 
   resetar() {
@@ -102,7 +118,7 @@ export class DataFormComponent implements OnInit {
   }
 
   verificaValidTouched(campo: string) {
-    return !this.formulario.get(campo).valid && this.formulario.get(campo).touched
+    return !this.formulario.get(campo).valid && (this.formulario.get(campo).touched || this.formulario.get(campo).dirty)
   }
 
   verificaEmailInvalido() {
@@ -110,7 +126,7 @@ export class DataFormComponent implements OnInit {
 
 
     if (campoEmail.errors) {
-      return campoEmail.errors && campoEmail.touched;
+      return campoEmail.errors.required && campoEmail.touched;
     }
   }
 
