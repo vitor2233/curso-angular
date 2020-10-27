@@ -73,6 +73,7 @@ export class DataFormComponent implements OnInit {
 
     let valueSubmit = Object.assign({}, this.formulario.value);
 
+    //Pegar os valores do form (json) e substituir o frameworks, de true, pelo nome do framework
     valueSubmit = Object.assign(valueSubmit, {
       frameworks: valueSubmit.frameworks
         .map((v, i) => v ? this.frameworks[i] : null)
@@ -81,7 +82,7 @@ export class DataFormComponent implements OnInit {
 
     if (this.formulario.valid) {
       this.http.post('https://httpbin.org/post',
-        JSON.stringify(this.formulario.value))
+        JSON.stringify(valueSubmit))
         .pipe(map(dados => dados))
         .subscribe(dados => {
           console.log(dados);
