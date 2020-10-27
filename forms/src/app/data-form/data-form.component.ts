@@ -20,6 +20,7 @@ export class DataFormComponent implements OnInit {
   cargos: any[];
   tecnologias: any[];
   newsletterOptions: any[];
+  frameworks = ['Angular', 'Js', 'Vue', 'NuGet'];
 
   constructor(
     private formBuilder: FormBuilder,
@@ -58,11 +59,26 @@ export class DataFormComponent implements OnInit {
       cargo: [null],
       tecnologias: [null],
       newsletter: ['s'],
-      termos: [null, Validators.required]
+      termos: [null, Validators.required],
+      frameworks: this.buildFrameworks()
     });
   }
 
+  buildFrameworks() {
+    const values = this.frameworks.map(v => new FormControl(false));
+    return this.formBuilder.array(values);
+  }
+
   onSubmit() {
+
+    let valueSubmit = Object.assign({}, this.formulario.value);
+
+    valueSubmit = Object.assign(valueSubmit, {
+      frameworks: valueSubmit.frameworks
+        .map((v, i) => v ? this.frameworks[i] : null)
+        .filter(v => v !== null)
+    });
+
     if (this.formulario.valid) {
       this.http.post('https://httpbin.org/post',
         JSON.stringify(this.formulario.value))
@@ -156,7 +172,7 @@ export class DataFormComponent implements OnInit {
     return obj1 && obj2 ? (obj1.nome === obj2.nome && obj1.nivel === obj2.nivel) : obj1 === obj2;
   }
 
-  setarTech(){
+  setarTech() {
     this.formulario.get('tecnologias').setValue(['php', 'ruby']);
   }
 
