@@ -12,4 +12,12 @@ export class DropdownService {
   getEstadosBr(){
     return this.http.get<EstadoBr[]>('assets/dados/estadosBr.json').pipe();
   }
+
+  getCargos(){
+    return [
+      { nome: 'dev', nivel: 'junior', desc: 'Dev Jr' },
+      { nome: 'dev', nivel: 'pleno', desc: 'Dev Pl' },
+      { nome: 'dev', nivel: 'senior', desc: 'Dev Sr' }
+    ];
+  }
 }

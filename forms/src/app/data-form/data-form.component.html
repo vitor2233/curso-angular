@@ -84,17 +84,25 @@
         [ngClass]="aplicaCssErro('endereco.estado')">
         <option *ngFor="let estado of estados | async" [value]="estado.sigla">{{ estado.nome }}</option>
       </select>
-      <div>
         <div class="invalid-feedback" *ngIf="verificaValidTouched('endereco.estado')">
           <span>Estado é obrigatório</span>
-        </div>
       </div>
     </div>
   </div>
   </div>
 
+  <div class="form-group">
+    <div class="col-md-5 form-group">
+      <label for="cargo" class="control-label">Cargo</label>
+      <select class="form-control" id="cargo" formControlName="cargo" [compareWith]="compararCargos">
+        <option *ngFor="let cargo of cargos" [ngValue]="cargo">{{ cargo.desc }}</option>
+      </select>
+    </div>
+  </div>
+
   <button type="submit" class="btn btn-primary">Submit</button>
   <button type="reset" class="btn btn-secondary" (click)="resetar()">Cancelar</button>
+  <button type="button" class="btn btn-warning" (click)="setarCargo()">Setar cargo</button>
 
   <app-form-debug [form]="formulario"></app-form-debug>
 </form>
