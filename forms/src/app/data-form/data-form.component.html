@@ -134,6 +134,9 @@
             {{ frameworks[i] }}
           </label>
         </div>
+        <div class="invalid-feedback" *ngIf="verificaValidTouched('endereco.estado')">
+          <span>Selecione uma opção</span>
+        </div>
       </div>
     </div>
   </div>
