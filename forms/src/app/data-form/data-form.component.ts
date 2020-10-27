@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { map } from 'rxjs/operators';
 import { EstadoBr } from '../shared/models/estado-br';
+import { ConsultaCepService } from '../shared/services/consulta-cep.service';
 import { DropdownService } from '../shared/services/dropdown.service';
 
 @Component({
@@ -18,7 +19,8 @@ export class DataFormComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private http: HttpClient,
-    private dropdownService: DropdownService
+    private dropdownService: DropdownService,
+    private cepService: ConsultaCepService
   ) { }
 
   ngOnInit(): void {
@@ -82,23 +84,11 @@ export class DataFormComponent implements OnInit {
   }
 
   consultaCEP() {
+    const cep = this.formulario.get('endereco.cep').value;
 
-    let cep = this.formulario.get('endereco.cep').value;
-
-    //Tirar letras
-    cep = cep.replace(/\D/g, '');
-
-    if (cep != "") {
-      //Precisa ter 8 dígitos de 0 a 9
-      const validacep = /^[0-9]{8}$/;
-
-      if (validacep.test(cep)) {
-
-        this.resetaDadosForm();
-
-        this.http.get(`https://viacep.com.br/ws/${cep}/json/`)
-          .subscribe(dados => this.populaDadosForm(dados));
-      }
+    if (cep != null && cep !== "") {
+      this.cepService.consultaCEP(cep)
+        .subscribe(dados => this.populaDadosForm(dados));
     }
   }
 
