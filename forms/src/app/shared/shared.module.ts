@@ -4,21 +4,27 @@ import { FormDebugComponent } from './form-debug/form-debug.component';
 import { CampoControlComponent } from './campo-control/campo-control.component';
 import { DropdownService } from './services/dropdown.service';
 import { HttpClientModule } from '@angular/common/http';
+import { ErrorMsgComponent } from './error-msg/error-msg.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 
 @NgModule({
   declarations: [
     FormDebugComponent,
-    CampoControlComponent
+    CampoControlComponent,
+    ErrorMsgComponent
   ],
   imports: [
     CommonModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   exports: [
     FormDebugComponent,
-    CampoControlComponent
+    CampoControlComponent,
+    ErrorMsgComponent
   ], providers: [DropdownService]
 })
 export class SharedModule { }

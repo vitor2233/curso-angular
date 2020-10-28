@@ -5,9 +5,7 @@
     </div>
     <div class="col-sm-12">
       <input type="text" class="form-control" formControlName="nome" id="nome" [ngClass]="aplicaCssErro('nome')">
-      <div class="invalid-feedback" *ngIf="verificaValidTouched('nome')">
-        <span>Nome é obrigatório</span>
-      </div>
+      <app-error-msg [control]="formulario.get('nome')" label="Nome"></app-error-msg>
     </div>
   </div>
   <div class="form-group">
