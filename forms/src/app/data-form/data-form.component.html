@@ -20,6 +20,15 @@
       <div class="invalid-feedback" *ngIf="verificaEmailInvalido()">
         <span>Email inválido</span>
       </div>
+      <div class="invalid-feedback" *ngIf="formulario.get('email').status === 'PENDING'">
+        <span>Validando email...</span>
+      </div>
+      <div class="invalid-feedback" *ngIf="formulario.get('email').status === 'VALID'">
+        <span>Email válido!</span>
+      </div>
+      <div class="invalid-feedback" *ngIf="formulario.get('email').hasError('emailInvalido')">
+        <span>Email já cadastrado!</span>
+      </div>
     </div>
   </div>
   <div class="form-group">

@@ -8,6 +8,7 @@ import { FormValidation } from '../shared/form-validation';
 import { EstadoBr } from '../shared/models/estado-br';
 import { ConsultaCepService } from '../shared/services/consulta-cep.service';
 import { DropdownService } from '../shared/services/dropdown.service';
+import { VerificaEmailService } from './services/verifica-email.service';
 
 @Component({
   selector: 'app-data-form',
@@ -27,7 +28,8 @@ export class DataFormComponent implements OnInit {
     private formBuilder: FormBuilder,
     private http: HttpClient,
     private dropdownService: DropdownService,
-    private cepService: ConsultaCepService
+    private cepService: ConsultaCepService,
+    private verificaEmailService: VerificaEmailService
   ) { }
 
   ngOnInit(): void {
@@ -47,7 +49,7 @@ export class DataFormComponent implements OnInit {
         Validators.required,
         Validators.minLength(3),
         Validators.email
-      ]],
+      ], [this.validarEmail.bind(this)]],
       confirmarEmail: [null, [
         FormValidation.equalsTo('email'),
         Validators.minLength(3),
@@ -190,6 +192,11 @@ export class DataFormComponent implements OnInit {
 
   setarTech() {
     this.formulario.get('tecnologias').setValue(['php', 'ruby']);
+  }
+
+  validarEmail(formControl: FormControl) {
+    return this.verificaEmailService.verificarEmail(formControl.value)
+      .pipe(map(emailExiste => emailExiste ? { emailInvalido: true } : null));
   }
 
 }
